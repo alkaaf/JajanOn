@@ -1,6 +1,10 @@
 package com.dalbo.jajanon;
 
+import android.app.Dialog;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 
 import com.dalbo.jajanon.frag.home;
 import com.dalbo.jajanon.frag.kelola;
@@ -20,16 +25,25 @@ import com.dalbo.jajanon.frag.profile;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    Fragment fhome, fkelola, fprofile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar.setTitle("JajanOn");
         setSupportActionBar(toolbar);
+        // set fragment
+        fhome = new home();
+        fkelola = new kelola();
+        fprofile = new profile();
+        // set fragment to home
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.main_fragment,new home());
+        ft.replace(R.id.main_fragment,fhome);
         ft.commit();
+
+        // fab
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +68,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        } else if(!getFragmentManager().findFragmentById(R.id.main_fragment).equals(fhome)){
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.main_fragment,fhome);
+            ft.commit();
+        } else{
             super.onBackPressed();
         }
     }
@@ -88,11 +106,14 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         if (id == R.id.nav_profil) {
-            ft.replace(R.id.main_fragment,new profile());
+            ft.replace(R.id.main_fragment,fprofile);
         } else if(id == R.id.nav_kelola){
-            ft.replace(R.id.main_fragment,new kelola());
+            ft.replace(R.id.main_fragment,fkelola);
         } else if (id == R.id.nav_logout){
-
+            Dialog register = new Dialog(this);
+            register.setContentView(R.layout.popup_login);
+            register.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            register.show();
         }
         ft.commit();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
