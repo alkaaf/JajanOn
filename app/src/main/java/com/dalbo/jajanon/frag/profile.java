@@ -1,26 +1,26 @@
-package com.dalbo.jajanon.frag;
+package com.dalbo.jajanon.Frag;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.Fragment;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TabHost;
 
+
+import com.dalbo.jajanon.Adapt.ProfilePager;
 import com.dalbo.jajanon.MapActivity;
+import com.dalbo.jajanon.Frag.profil_tab.*;
 import com.dalbo.jajanon.R;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-
-import java.util.Map;
 
 /**
  * Created by alkaaf on 6/23/2016.
@@ -28,7 +28,8 @@ import java.util.Map;
 public class profile extends Fragment implements View.OnClickListener {
     Activity a;
     Context c;
-    Button b_bukaPeta;
+    ImageView b_bukaPeta;
+    ViewPager vp;
     public profile() {
     }
     @Nullable
@@ -37,8 +38,12 @@ public class profile extends Fragment implements View.OnClickListener {
         View v =  inflater.inflate(R.layout.frag_profile, container, false);
         c = getActivity();
         a = getActivity();
-        b_bukaPeta = (Button) v.findViewById(R.id.b_bukaPeta);
+
+        b_bukaPeta = (ImageView) v.findViewById(R.id.b_bukaPeta);
         b_bukaPeta.setOnClickListener(this);
+        vp = (ViewPager)v.findViewById(R.id.content_profile);
+        vp.setAdapter(new ProfilePager(getChildFragmentManager()));
+
         ((Toolbar)a.findViewById(R.id.toolbar)).setTitle("Profil");
         return v;
     }

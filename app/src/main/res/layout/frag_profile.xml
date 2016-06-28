@@ -1,115 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/header_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/header_profile"
-        android:background="@drawable/dummy_cover"
-        >
+        android:background="@drawable/dummy_cover">
 
         <RelativeLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:id="@+id/relativeLayout"
             android:layout_centerVertical="true"
-            android:padding="1dp"
+            android:layout_marginLeft="16dp"
             android:background="@color/white"
-            >
+            android:padding="1dp">
 
             <ImageView
+                android:id="@+id/img_avatar"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:id="@+id/img_avatar"
-                android:src="@drawable/dummy_avatar"
-                android:background="@color/white"
-                android:scaleType="centerCrop"
-
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
+                android:background="@color/white"
+
+                android:scaleType="centerCrop"
+                android:src="@drawable/dummy_avatar" />
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginLeft="10dp"
             android:text="SomeWone"
-            android:id="@+id/text_name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/white"
             android:textStyle="bold|italic"
-            android:layout_marginLeft="10dp"
             android:layout_alignBottom="@+id/relativeLayout"
             android:layout_toEndOf="@+id/relativeLayout" />
+
+        <ImageView
+            android:id="@+id/b_bukaPeta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@mipmap/ic_map"
+            android:layout_alignTop="@+id/relativeLayout"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:id="@+id/b_subscribe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_subscribe"
+            android:layout_below="@+id/b_bukaPeta"
+            android:layout_alignEnd="@+id/b_bukaPeta" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/b_subscribe"
+            android:layout_alignStart="@+id/b_subscribe"
+            android:background="@mipmap/ic_star"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="5"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/textView3"
+                android:layout_below="@+id/b_bukaPeta"
+                android:layout_alignStart="@+id/imageView2"
+                android:textColor="@color/white" />
+        </RelativeLayout>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout2"
-        android:foregroundGravity="center_vertical|center_horizontal"
-        android:layout_below="@+id/header_profile"
-        android:layout_alignStart="@+id/scrollView"
-        android:layout_alignEnd="@+id/scrollView"
-        android:textAlignment="center"
-        >
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="LANGGANAN"
-            android:id="@+id/button"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:background="@color/colorPrimary"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:layout_margin="5dp"
-            android:textColor="@color/white"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="BUKA PETA"
-            android:id="@+id/b_bukaPeta"
-            android:background="@color/colorPrimary"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:textColor="@color/white"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_alignTop="@+id/button"
-            android:layout_toEndOf="@+id/button" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="4.5"
-            android:id="@+id/textView3"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/b_bukaPeta"
-            android:textColor="@color/colorPrimary"
-            android:textSize="27dp" />
-
-    </RelativeLayout>
-
-    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/relativeLayout2">
+        android:layout_below="@+id/header_profile"
+        android:layout_centerHorizontal="true">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></RelativeLayout>
-    </ScrollView>
+        <android.support.v4.view.ViewPager
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/content_profile"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" >
+
+            <android.support.v4.view.PagerTabStrip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view2"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white" />
+        </android.support.v4.view.ViewPager>
+    </RelativeLayout>
 
 </RelativeLayout>

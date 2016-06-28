@@ -35,5 +35,6 @@
         <activity
             android:name=".MapActivity"
             android:theme="@android:style/Theme.Dialog" />
+
     </application>
 </manifest>

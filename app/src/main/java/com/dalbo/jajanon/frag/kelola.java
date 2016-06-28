@@ -1,21 +1,20 @@
-package com.dalbo.jajanon.frag;
+package com.dalbo.jajanon.Frag;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.Fragment;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 import com.dalbo.jajanon.CustomClass.FileChooser;
