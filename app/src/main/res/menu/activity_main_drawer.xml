@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_profil"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_profile"
             android:title="Profil" />
         <item
-            android:id="@+id/nav_kelola"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Kelola" />
+            android:id="@+id/nav_subscribelist"
+            android:icon="@drawable/ic_subscribelist"
+            android:title="Langganan" />
+        <item
+            android:id="@+id/nav_tambahusaha"
+            android:icon="@drawable/ic_tambahusaha"
+            android:title="Tambah Usaha" />
+
+        <item
+            android:id="@+id/nav_pengaturan"
+            android:icon="@drawable/ic_pengaturan"
+            android:title="Pengaturan" />
+        <item
+            android:id="@+id/nav_tentang"
+            android:icon="@drawable/ic_about"
+            android:title="Tentang" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout" />
     </group>
-
-    <item android:title="Akun">
-        <menu>
-            <item
-                android:id="@+id/nav_logout"
-                android:title="Logout"
-               />
-        </menu>
-    </item>
-
 </menu>

@@ -1,17 +1,10 @@
 package com.dalbo.jajanon;
 
-import android.app.Dialog;
 
-
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
+import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,30 +14,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.dalbo.jajanon.Frag.home;
-import com.dalbo.jajanon.Frag.kelola;
-import com.dalbo.jajanon.Frag.profile;
+import com.dalbo.jajanon.Adapt.pager.HomePager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    Fragment fhome, fkelola, fprofile;
+    ViewPager home_content;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        home_content = (ViewPager) findViewById(R.id.home_content);
 
+        home_content.setAdapter(new HomePager(getSupportFragmentManager(),this,this));
         toolbar.setTitle("JajanOn");
         setSupportActionBar(toolbar);
-        // set fragment
-        fhome = new home();
-        fkelola = new kelola();
-        fprofile = new profile();
-        // set fragment to home
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_fragment,fhome);
-        ft.commit();
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -61,11 +46,7 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else if(!getSupportFragmentManager().findFragmentById(R.id.main_fragment).equals(fhome)){
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.main_fragment,fhome);
-            ft.commit();
-        } else{
+        } else {
             super.onBackPressed();
         }
     }
@@ -97,18 +78,15 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Intent i;
+
         if (id == R.id.nav_profil) {
-            ft.replace(R.id.main_fragment,fprofile);
-        } else if(id == R.id.nav_kelola){
-            ft.replace(R.id.main_fragment,fkelola);
-        } else if (id == R.id.nav_logout){
-            Dialog register = new Dialog(this);
-            register.setContentView(R.layout.popup_login);
-            register.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            register.show();
+            i = new Intent(this,ProfileActivity.class);
+            startActivity(i);
+        }  else if (id == R.id.nav_logout) {
+
         }
-        ft.commit();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

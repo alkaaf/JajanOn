@@ -35,6 +35,10 @@
         <activity
             android:name=".MapActivity"
             android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LapakActivity"/>
 
     </application>
 </manifest>

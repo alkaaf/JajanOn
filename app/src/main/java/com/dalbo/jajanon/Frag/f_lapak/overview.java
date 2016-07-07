@@ -1,0 +1,25 @@
+package com.dalbo.jajanon.Frag.f_lapak;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.dalbo.jajanon.R;
+
+/**
+ * Created by alkaaf on 7/7/2016.
+ */
+public class overview extends Fragment{
+    public overview() {
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.n_lapak_overview, container, false);
+        return v;
+    }
+}
