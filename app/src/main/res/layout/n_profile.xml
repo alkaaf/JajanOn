@@ -23,6 +23,17 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/img_avatar"
+            android:layout_alignStart="@+id/img_avatar"
+            android:layout_alignBottom="@+id/img_avatar"
+            android:layout_alignEnd="@+id/img_avatar">
+
+
+        </FrameLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,6 +54,7 @@
             android:layout_below="@+id/nama"
             android:textColor="@color/white"
             android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
 
     <RelativeLayout
