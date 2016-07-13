@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.ViewGroup;
 
 import com.dalbo.jajanon.Frag.f_home.terbaru;
 import com.dalbo.jajanon.Frag.f_home.terdekat;
@@ -18,6 +17,8 @@ public class HomePager extends FragmentPagerAdapter {
     int n;
     Context c;
     Activity a;
+
+    // konstruktor untuk mengisi fragmentmanager pada parent
     public HomePager(FragmentManager fm, Context c, Activity a) {
         super(fm);
         this.n = 3;
@@ -25,6 +26,7 @@ public class HomePager extends FragmentPagerAdapter {
         this.a = a;
     }
 
+    // Pengembalian fragment sebagai view di viewpager
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
@@ -36,12 +38,13 @@ public class HomePager extends FragmentPagerAdapter {
         } else return null;
     }
 
+    // Mengembalikan jumlah tab dalam viewpager
     @Override
     public int getCount() {
         return n;
     }
 
-
+    // pemBerian judul pada tab
     @Override
     public CharSequence getPageTitle(int position) {
         if (position == 0) {

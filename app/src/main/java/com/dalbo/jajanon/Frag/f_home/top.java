@@ -24,7 +24,7 @@ public class top extends Fragment implements ListView.OnItemClickListener{
     ListView lv;
     public top() {
     }
-
+    // pembuatan view untuk fragment berisi setAdapter terhadap listview
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class top extends Fragment implements ListView.OnItemClickListener{
         lv.setOnItemClickListener(this);
         return v;
     }
-
+    // listener ketika terdapat item diclick
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getContext(), LapakActivity.class);

@@ -12,10 +12,12 @@ import com.dalbo.jajanon.Frag.f_lapak.ulasan;
  * Created by alkaaf on 7/7/2016.
  */
 public class LapakPager extends FragmentPagerAdapter{
+    // konstruktor untuk mengisi fragmentmanager pada parent
     public LapakPager(FragmentManager fm) {
         super(fm);
     }
 
+    // Pengembalian fragment sebagai view di viewpager
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
@@ -26,11 +28,13 @@ public class LapakPager extends FragmentPagerAdapter{
             return new ulasan();
         } else return null;
     }
-
+    // Mengembalikan jumlah tab dalam viewpager
     @Override
     public int getCount() {
         return 3;
     }
+
+    // pemBerian judul pada tab
     @Override
     public CharSequence getPageTitle(int position) {
         if (position == 0) {

@@ -1,10 +1,7 @@
 package com.dalbo.jajanon.Frag.f_lapak;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +11,6 @@ import com.dalbo.jajanon.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
@@ -27,6 +23,7 @@ public class lokasi extends Fragment implements OnMapReadyCallback {
     public lokasi() {
     }
 
+    // Pembuatan view berisi map yang digunakan untuk menampilkan lokasi
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,7 +34,7 @@ public class lokasi extends Fragment implements OnMapReadyCallback {
         mapv.getMapAsync(this);
         return v;
     }
-
+    //listener ketika map telah sedia untuk ditampilkan
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.gmap = googleMap;

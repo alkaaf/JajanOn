@@ -12,13 +12,13 @@ import com.dalbo.jajanon.Adapt.listview.HomeListRowView;
 import com.dalbo.jajanon.Entity.HomeList;
 import com.dalbo.jajanon.R;
 
-import java.util.List;
-
 /**
  * Created by alkaaf on 7/7/2016.
  */
 public class usaha extends Fragment{
     ListView lv;
+
+    // set adapter pada listview dan tampilkan view
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

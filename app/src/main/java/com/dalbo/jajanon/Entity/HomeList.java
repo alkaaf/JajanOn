@@ -1,6 +1,5 @@
 package com.dalbo.jajanon.Entity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -10,6 +9,7 @@ public class HomeList {
     String usaha, alamat, jarak, status;
     int id;
 
+    // konstruktor pengisian data
     public HomeList(int id, String usaha, String alamat, String jarak, String status) {
         this.usaha = usaha;
         this.alamat = alamat;
@@ -18,6 +18,7 @@ public class HomeList {
         this.id = id;
     }
 
+    // method get untuk mengambil data >>>>
     public String getUsaha() {
         return usaha;
     }
@@ -37,7 +38,9 @@ public class HomeList {
     public int getId() {
         return id;
     }
+    // <<<<
 
+    // data percobaan
     public static ArrayList<HomeList> getDummy(){
         ArrayList<HomeList> data = new ArrayList<>();
         data.add(new HomeList(1,"Nasgor pesawat 123","Patung pesawat","0.9 KM","buka"));

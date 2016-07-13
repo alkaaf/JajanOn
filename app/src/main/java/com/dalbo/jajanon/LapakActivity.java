@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.dalbo.jajanon.Adapt.pager.LapakPager;
 
@@ -14,6 +13,8 @@ import com.dalbo.jajanon.Adapt.pager.LapakPager;
 public class LapakActivity extends AppCompatActivity {
 
     ViewPager vp;
+
+    //tampilkan layout lapak dan memasang adapter pada view pager
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

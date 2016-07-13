@@ -20,9 +20,12 @@ import com.dalbo.jajanon.R;
  */
 public class terdekat extends Fragment implements ListView.OnItemClickListener{
     ListView lv;
+
+    // blank constructor
     public terdekat() {
     }
 
+    // pembuatan view untuk fragment berisi setAdapter terhadap listview
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class terdekat extends Fragment implements ListView.OnItemClickListener{
         return v;
     }
 
+    // listener ketika terdapat item diclick
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getContext(), LapakActivity.class);

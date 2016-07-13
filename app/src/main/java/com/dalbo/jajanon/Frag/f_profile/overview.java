@@ -18,10 +18,12 @@ public class overview extends Fragment implements View.OnClickListener{
     Button showusaha, showlangganan;
     ViewPager vp;
 
+    // set viewpager untuk tombol
     public overview(ViewPager vp) {
         this.vp = vp;
     }
 
+    // inflate view
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class overview extends Fragment implements View.OnClickListener{
         return v;
     }
 
+    // tambahkan aksi ketika tombol di klik
     @Override
     public void onClick(View v) {
         if(v == showusaha){

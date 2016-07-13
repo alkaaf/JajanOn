@@ -1,46 +1,77 @@
 package com.dalbo.jajanon;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.dalbo.jajanon.Adapt.pager.HomePager;
+import com.dalbo.jajanon.Core.Pref;
+import com.dalbo.jajanon.Dialg.login;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ViewPager home_content;
+    Menu mainMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        home_content = (ViewPager) findViewById(R.id.home_content);
-
-        home_content.setAdapter(new HomePager(getSupportFragmentManager(),this,this));
-        toolbar.setTitle("JajanOn");
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
+        // deklarasi navigation menu
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        mainMenu = navigationView.getMenu();
+        Pref.init(this);
+
+        // deklarasi variabel untuk toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        // deklarasi viewpager kedalam variabel
+        home_content = (ViewPager) findViewById(R.id.home_content);
+
+        // masukkan adapter kedalam viewpager
+        home_content.setAdapter(new HomePager(getSupportFragmentManager(), this, this));
+
+        toolbar.setTitle("JajanOn");
+        setSupportActionBar(toolbar);
+        // deklarasi navigation drawer
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                if (Pref.getUid() > 0) {
+                    mainMenu.findItem(R.id.nav_profil).setVisible(true);
+                    mainMenu.findItem(R.id.nav_subscribelist).setVisible(true);
+                    mainMenu.findItem(R.id.nav_tambahusaha).setVisible(true);
+                    mainMenu.findItem(R.id.nav_logout).setVisible(true);
+                    mainMenu.findItem(R.id.nav_login).setVisible(false);
+                } else if (Pref.getUid() == 0) {
+                    mainMenu.findItem(R.id.nav_profil).setVisible(false);
+                    mainMenu.findItem(R.id.nav_subscribelist).setVisible(false);
+                    mainMenu.findItem(R.id.nav_tambahusaha).setVisible(false);
+                    mainMenu.findItem(R.id.nav_logout).setVisible(false);
+                    mainMenu.findItem(R.id.nav_login).setVisible(true);
+                }
+                super.onDrawerSlide(drawerView, slideOffset);
+            }
+        };
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
     }
 
+    // override ketika tombol back android ditekan
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -58,6 +89,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    // pemberian flag ketika item option dipilih
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -73,6 +105,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    // aksi ketika item dalam navigation drawer dipilih
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -81,12 +114,18 @@ public class MainActivity extends AppCompatActivity
         Intent i;
 
         if (id == R.id.nav_profil) {
-            i = new Intent(this,ProfileActivity.class);
+            i = new Intent(this, ProfileActivity.class);
             startActivity(i);
-        }  else if (id == R.id.nav_logout) {
-
+        } else if (id == R.id.nav_login) {
+            Dialog d = new login(this, this);
+            d.setTitle("Login");
+            d.getWindow().setTitleColor(R.color.white);
+            d.getWindow().setBackgroundDrawableResource(R.color.colorPrimary);
+            d.setCancelable(true);
+            d.show();
+        } else if (id == R.id.nav_logout) {
+            Pref.putUid(0);
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

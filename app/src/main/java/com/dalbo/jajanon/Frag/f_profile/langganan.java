@@ -22,6 +22,7 @@ public class langganan extends Fragment{
 
     @Nullable
     @Override
+    // inflate view set adapter
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.n_profile_tab_list,container,false);
         lv = (ListView)v.findViewById(R.id.list_usaha);

@@ -1,6 +1,5 @@
 package com.dalbo.jajanon.Frag.f_home;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,18 +15,18 @@ import com.dalbo.jajanon.Entity.HomeList;
 import com.dalbo.jajanon.LapakActivity;
 import com.dalbo.jajanon.R;
 
-import java.util.List;
-
 /**
  * Created by alkaaf on 7/7/2016.
  */
 public class terbaru extends Fragment implements ListView.OnItemClickListener{
 //    Context c;
     ListView lv;
+
+    //blank constructor fragment
     public terbaru(){
 
     }
-
+    // pembuatan view dengan cara inflate layout
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,6 +37,7 @@ public class terbaru extends Fragment implements ListView.OnItemClickListener{
         return v;
     }
 
+    // listener ketika terdapat item diclick
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getContext(), LapakActivity.class);
