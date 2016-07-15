@@ -13,54 +13,55 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by alkaaf on 7/11/2016.
+ * Created by alkaaf on 7/13/2016.
  */
-public class Autentikasi {
+public class Register {
+    String addr;
     String mainUrl;
     URL url;
 
-    public Autentikasi(String mainUrl) {
+    public Register(String mainUrl) {
         try {
-            this.url = new URL(mainUrl + "login.php");
+            this.url = new URL(mainUrl + "register.php");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
-    public int login(String email, String password) {
-        HttpURLConnection conn = null;
+    public int register(String username, String email, String password, String telp) {
         BufferedReader br = null;
         InputStream is = null;
         OutputStream os = null;
-        StringBuilder buff;
+        int res = 0;
+        StringBuilder buff = null;
         String temp = null;
-        int status = 0;
+        HttpURLConnection conn = null;
         try {
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
-            conn.setDoInput(true);
+            conn.setDoOutput(true);
             conn.setDoOutput(true);
             conn.connect();
             os = conn.getOutputStream();
-            String data = "email=" + email + "&password=" + Hash.saltHash(password);
+            String data = "username=" + username + "&password=" + Hash.saltHash(password) + "&email=" + email + "&telp=" + telp;
             os.write(data.getBytes());
             if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 is = conn.getInputStream();
                 br = new BufferedReader(new InputStreamReader(is));
                 buff = new StringBuilder();
-                while ((temp = br.readLine()) != null) {
+                while((temp = br.readLine()) != null){
                     buff.append(temp);
                 }
                 JSONObject jo = new JSONObject(buff.toString());
-                status = jo.getInt("uid");
-                return status;
-            } else return -1;
+                res = jo.getInt("res");
+                return res;
+            } else return -2;
         } catch (IOException e) {
             e.printStackTrace();
-            return -1;
+            return -2;
         } catch (JSONException e) {
             e.printStackTrace();
-            return -1;
+            return -2;
         }
     }
 }

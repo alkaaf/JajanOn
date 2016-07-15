@@ -20,7 +20,7 @@
         >
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/avatar"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/dummy_avatar"
@@ -45,7 +45,8 @@
 
             android:layout_above="@+id/email"
             android:layout_alignStart="@+id/email"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:id="@+id/name" />
 
         <TextView
             android:id="@+id/email"

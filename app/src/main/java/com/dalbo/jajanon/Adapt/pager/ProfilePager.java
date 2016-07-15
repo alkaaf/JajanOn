@@ -1,17 +1,14 @@
 package com.dalbo.jajanon.Adapt.pager;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.dalbo.jajanon.Frag.f_home.terbaru;
-import com.dalbo.jajanon.Frag.f_home.terdekat;
-import com.dalbo.jajanon.Frag.f_home.top;
 import com.dalbo.jajanon.Frag.f_profile.langganan;
 import com.dalbo.jajanon.Frag.f_profile.overview;
 import com.dalbo.jajanon.Frag.f_profile.usaha;
+import com.dalbo.jajanon.Service.UserData;
 
 /**
  * Created by alkaaf on 7/7/2016.
@@ -20,23 +17,26 @@ import com.dalbo.jajanon.Frag.f_profile.usaha;
 
 public class ProfilePager extends FragmentPagerAdapter {
     ViewPager vp;
-    public ProfilePager(FragmentManager fm) {
+    UserData data;
+    public ProfilePager(FragmentManager fm, UserData d) {
         super(fm);
+        this.data = d;
     }
 
-    public ProfilePager(FragmentManager fm, ViewPager vp) {
+    public ProfilePager(FragmentManager fm, UserData d, ViewPager vp) {
         super(fm);
         this.vp = vp;
+        this.data = d;
     }
 
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new overview(vp);
+            return new overview(data);
         } else if (position == 1) {
-            return new langganan();
+            return new langganan(data);
         } else if (position == 2) {
-            return new usaha();
+            return new usaha(data);
         } else return null;
     }
 

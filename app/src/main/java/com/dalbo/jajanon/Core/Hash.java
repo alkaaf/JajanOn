@@ -22,4 +22,8 @@ public class Hash {
         }
         return null;
     }
+    public static String saltHash(String val){
+        String salt = "katok kolor kuning klombor klombor kintir nang kali";
+        return sha256(sha256(salt) + sha256(val));
+    }
 }

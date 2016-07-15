@@ -18,6 +18,7 @@ import android.view.View;
 import com.dalbo.jajanon.Adapt.pager.HomePager;
 import com.dalbo.jajanon.Core.Pref;
 import com.dalbo.jajanon.Dialg.login;
+import com.dalbo.jajanon.Dialg.register;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -57,12 +58,14 @@ public class MainActivity extends AppCompatActivity
                     mainMenu.findItem(R.id.nav_tambahusaha).setVisible(true);
                     mainMenu.findItem(R.id.nav_logout).setVisible(true);
                     mainMenu.findItem(R.id.nav_login).setVisible(false);
+                    mainMenu.findItem(R.id.nav_register).setVisible(false);
                 } else if (Pref.getUid() == 0) {
                     mainMenu.findItem(R.id.nav_profil).setVisible(false);
                     mainMenu.findItem(R.id.nav_subscribelist).setVisible(false);
                     mainMenu.findItem(R.id.nav_tambahusaha).setVisible(false);
                     mainMenu.findItem(R.id.nav_logout).setVisible(false);
                     mainMenu.findItem(R.id.nav_login).setVisible(true);
+                    mainMenu.findItem(R.id.nav_register).setVisible(true);
                 }
                 super.onDrawerSlide(drawerView, slideOffset);
             }
@@ -115,6 +118,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_profil) {
             i = new Intent(this, ProfileActivity.class);
+            i.putExtra("tab", 0);
             startActivity(i);
         } else if (id == R.id.nav_login) {
             Dialog d = new login(this, this);
@@ -123,8 +127,23 @@ public class MainActivity extends AppCompatActivity
             d.getWindow().setBackgroundDrawableResource(R.color.colorPrimary);
             d.setCancelable(true);
             d.show();
+        } else if (id == R.id.nav_register){
+            Dialog d = new register(this,this);
+            d.setTitle("Register");
+            d.getWindow().setTitleColor(R.color.white);
+            d.getWindow().setBackgroundDrawableResource(R.color.colorPrimary);
+            d.setCancelable(true);
+            d.show();
         } else if (id == R.id.nav_logout) {
             Pref.putUid(0);
+        } else if (id == R.id.nav_subscribelist) {
+            i = new Intent(this, ProfileActivity.class);
+            i.putExtra("tab", 1);
+            startActivity(i);
+        } else if (id == R.id.nav_tambahusaha) {
+            i = new Intent(this, ProfileActivity.class);
+            i.putExtra("tab", 2);
+            startActivity(i);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

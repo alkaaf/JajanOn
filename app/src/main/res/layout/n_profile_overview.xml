@@ -45,21 +45,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2 Lapak"
-            android:id="@+id/jml_usaha"
+            android:id="@+id/jml_lapak"
             android:layout_below="@+id/textView"
             android:layout_alignParentStart="true" />
 
-        <Button
-            android:height="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="LIHAT"
-            android:id="@+id/show_usaha"
-            android:background="@drawable/bunder"
-            android:textColor="@color/white"
-            android:textSize="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -84,16 +73,5 @@
             android:layout_below="@+id/textView"
             android:layout_alignParentStart="true" />
 
-        <Button
-            android:height="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="LIHAT"
-            android:id="@+id/show_langganan"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/bunder"
-            android:textColor="@color/white"
-            android:textSize="10dp" />
     </RelativeLayout>
 </RelativeLayout>

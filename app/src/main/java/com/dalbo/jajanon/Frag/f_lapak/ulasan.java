@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.dalbo.jajanon.Adapt.listview.Ulasan;
-import com.dalbo.jajanon.Entity.UlasanList;
+import com.dalbo.jajanon.Entity.DataUlasan;
 import com.dalbo.jajanon.R;
 
 /**
@@ -29,7 +29,7 @@ public class ulasan extends Fragment{
         View v = inflater.inflate(R.layout.n_lapak_ulasan,container,false);
         lv = (ListView)v.findViewById(R.id.ulasan_list);
         tambah_ulasan = (Button)v.findViewById(R.id.tambah_ulasan);
-        lv.setAdapter(new Ulasan(getContext(), UlasanList.getDummy()));
+        lv.setAdapter(new Ulasan(getContext(), DataUlasan.getDummy()));
         return v;
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@color/white"
@@ -18,7 +18,8 @@
             android:id="@+id/img_cover"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/dummy_avatar" />
+            android:src="@drawable/dummy_avatar"
+            android:scaleType="centerCrop" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -41,27 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Alamat"
-            android:layout_alignBottom="@+id/status"
+            android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/ratingBar" />
-
-        <TextView
-            android:id="@+id/jarak"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0.5 KM"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@+id/alamat"
-            android:layout_marginLeft="5dp" />
-
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BUKA"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:textSize="10dp" />
 
         <RatingBar
             android:layout_width="wrap_content"
@@ -79,6 +61,14 @@
             android:layout_alignTop="@+id/ratingBar"
             android:layout_toEndOf="@+id/ratingBar"
             android:layout_marginLeft="5dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@mipmap/ic_edit" />
     </RelativeLayout>
 
 </RelativeLayout>

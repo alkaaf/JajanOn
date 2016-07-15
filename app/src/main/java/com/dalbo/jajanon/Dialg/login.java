@@ -73,7 +73,7 @@ public class login extends Dialog implements View.OnClickListener {
                         act.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(c,"Kesalahan saat login, cak koneksi",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(c,"Kesalahan saat login, cek koneksi",Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

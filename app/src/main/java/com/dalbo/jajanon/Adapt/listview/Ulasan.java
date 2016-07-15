@@ -11,7 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.dalbo.jajanon.CustomClass.Rounder;
-import com.dalbo.jajanon.Entity.UlasanList;
+import com.dalbo.jajanon.Entity.DataUlasan;
 import com.dalbo.jajanon.R;
 
 import java.util.ArrayList;
@@ -19,10 +19,10 @@ import java.util.ArrayList;
 /**
  * Created by alkaaf on 7/10/2016.
  */
-public class Ulasan extends ArrayAdapter<UlasanList>{
-    ArrayList<UlasanList> data;
+public class Ulasan extends ArrayAdapter<DataUlasan>{
+    ArrayList<DataUlasan> data;
     Context c;
-    public Ulasan(Context context, ArrayList<UlasanList> objects) {
+    public Ulasan(Context context, ArrayList<DataUlasan> objects) {
         super(context, R.layout.n_lapak_ulasan_listview, objects);
         this.data = objects;
         this.c = context;
