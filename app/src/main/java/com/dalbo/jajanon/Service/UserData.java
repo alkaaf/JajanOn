@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.dalbo.jajanon.CustomClass.ImageDL;
 import com.dalbo.jajanon.Entity.DataLapak;
 import com.dalbo.jajanon.R;
 import com.google.android.gms.maps.model.LatLng;
@@ -15,7 +16,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -63,12 +63,10 @@ public class UserData {
             }
             data = new JSONObject(buff.toString());
             // dapatkan avatar user
-            if(getAvatar() == "null"){
-                bmAvatar = BitmapFactory.decodeResource(act.getResources(),R.drawable.dummy_avatar);
-            }
-            else {
-                InputStream is = new URL(mainUrl + "img/avatar/" + getAvatar()).openStream();
-                bmAvatar = BitmapFactory.decodeStream(is);
+            if (getAvatar() == "null") {
+                bmAvatar = BitmapFactory.decodeResource(act.getResources(), R.drawable.dummy_avatar);
+            } else {
+                bmAvatar = ImageDL.download(mainUrl + "img/avatar/" + getAvatar());
             }
             // dapatkan daftar lapak langganan user
 
@@ -77,6 +75,7 @@ public class UserData {
                 JSONObject lapak = ja.getJSONObject(i);
                 lapakLanggan.add(new DataLapak(
                         lapak.getInt("id"),
+                        lapak.getInt("id_user"),
                         lapak.getString("nama"),
                         lapak.getString("alamat"),
                         lapak.getString("sampul"),
@@ -85,7 +84,7 @@ public class UserData {
                         (float) lapak.getDouble("rating"),
                         new LatLng(lapak.getDouble("lat"), lapak.getDouble("lng")),
                         lapak.getLong("tstamp")));
-                lapakLanggan.get(i).downloadSampul(mainUrl+"img/cover/");
+                lapakLanggan.get(i).downloadSampul(mainUrl + "img/cover/");
             }
             // dapatkan daftar lapak user
 
@@ -94,6 +93,7 @@ public class UserData {
                 JSONObject lapak = ja.getJSONObject(i);
                 lapakKu.add(new DataLapak(
                         lapak.getInt("id"),
+                        lapak.getInt("id_user"),
                         lapak.getString("nama"),
                         lapak.getString("alamat"),
                         lapak.getString("sampul"),
@@ -102,10 +102,10 @@ public class UserData {
                         (float) lapak.getDouble("rating"),
                         new LatLng(lapak.getDouble("lat"), lapak.getDouble("lng")),
                         lapak.getLong("tstamp")));
-                lapakKu.get(i).downloadSampul(mainUrl+"img/cover/");
+                lapakKu.get(i).downloadSampul(mainUrl + "img/cover/");
             }
             int p = 0;
-            p = p+1;
+            p = p + 1;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -188,7 +188,8 @@ public class UserData {
     public ArrayList<DataLapak> getLapakLanggan() {
         return lapakLanggan;
     }
-    public ArrayList<DataLapak> getLapakKu(){
+
+    public ArrayList<DataLapak> getLapakKu() {
         return lapakKu;
     }
 }

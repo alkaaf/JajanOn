@@ -1,18 +1,17 @@
 package com.dalbo.jajanon.Entity;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
+import com.dalbo.jajanon.CustomClass.ImageDL;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
 
 /**
  * Created by alkaaf on 7/14/2016.
  */
 public class DataLapak {
+    int id_user;
     int id;
     String nama, alamat, sampul;
     int buka, tutup;
@@ -21,8 +20,9 @@ public class DataLapak {
     long timestamp;
     Bitmap cover;
 
-    public DataLapak(int id, String nama, String alamat, String sampul, int buka, int tutup, float rating, LatLng ll, long timestamp) {
+    public DataLapak(int id, int id_user, String nama, String alamat, String sampul, int buka, int tutup, float rating, LatLng ll, long timestamp) {
         this.id = id;
+        this.id_user = id_user;
         this.nama = nama;
         this.alamat = alamat;
         this.sampul = sampul;
@@ -36,6 +36,10 @@ public class DataLapak {
 
     public int getId() {
         return id;
+    }
+
+    public int getId_user() {
+        return id_user;
     }
 
     public String getNama() {
@@ -56,12 +60,11 @@ public class DataLapak {
 
     public void downloadSampul(String url){
         try {
-            cover = BitmapFactory.decodeStream(new URL(url + getSampul()).openStream());
+            cover = ImageDL.download(url + getSampul());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     public int getBuka() {
         return buka;
     }
@@ -82,13 +85,13 @@ public class DataLapak {
         return timestamp;
     }
 
-    public static ArrayList<DataLapak> getDummy() {
-        ArrayList<DataLapak> data = new ArrayList<>();
-        data.add(new DataLapak(1, "Nasgor 123", "Pesawat Suhat", "gambar.png", 6, 20, 2.8f, new LatLng(90, 25), 123456789));
-        data.add(new DataLapak(2, "Nasgor 345", "Pesawat Suhat", "gambar.png", 16, 20, 2.8f, new LatLng(90, 25), 123456789));
-        data.add(new DataLapak(3, "Nasgor 765", "Pesawat Suhat", "gambar.png", 10, 20, 2.8f, new LatLng(90, 25), 123456789));
-        data.add(new DataLapak(4, "Nasgor 987", "Pesawat Suhat", "gambar.png", 16, 20, 2.8f, new LatLng(90, 25), 123456789));
-        data.add(new DataLapak(5, "Nasgor 412", "Pesawat Suhat", "gambar.png", 9, 20, 2.8f, new LatLng(90, 25), 123456789));
-        return data;
-    }
+//    public static ArrayList<DataLapak> getDummy() {
+//        ArrayList<DataLapak> data = new ArrayList<>();
+//        data.add(new DataLapak(1, "Nasgor 123", "Pesawat Suhat", "gambar.png", 6, 20, 2.8f, new LatLng(90, 25), 123456789));
+//        data.add(new DataLapak(2, "Nasgor 345", "Pesawat Suhat", "gambar.png", 16, 20, 2.8f, new LatLng(90, 25), 123456789));
+//        data.add(new DataLapak(3, "Nasgor 765", "Pesawat Suhat", "gambar.png", 10, 20, 2.8f, new LatLng(90, 25), 123456789));
+//        data.add(new DataLapak(4, "Nasgor 987", "Pesawat Suhat", "gambar.png", 16, 20, 2.8f, new LatLng(90, 25), 123456789));
+//        data.add(new DataLapak(5, "Nasgor 412", "Pesawat Suhat", "gambar.png", 9, 20, 2.8f, new LatLng(90, 25), 123456789));
+//        return data;
+//    }
 }

@@ -1,6 +1,7 @@
 package com.dalbo.jajanon;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -25,12 +26,14 @@ public class ProfileActivity extends AppCompatActivity {
     int uid;
     Context c;
     Activity act;
+    ProgressDialog loading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.n_profile);
         Pref.init(this);
-        uid = Pref.getUid();
+//        uid = Pref.getUid();
+        uid = getIntent().getExtras().getInt("uid",0);
         c = this;
         act = this;
         avatar = (ImageView)findViewById(R.id.img_avatar);
@@ -42,6 +45,14 @@ public class ProfileActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        loading = new ProgressDialog(c);
+                        loading.setMessage("Tunggu sebentar...");
+                        loading.show();
+                    }
+                });
                 d.connect();
                 final Bitmap avatarBm = d.getBitmapAvatar();
                 runOnUiThread(new Runnable() {
@@ -52,6 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
                         avatar.setImageDrawable(new Rounder(avatarBm));
                         vp.setAdapter(new ProfilePager(getSupportFragmentManager(), d,vp));
                         vp.setCurrentItem(getIntent().getExtras().getInt("tab",0));
+                        loading.dismiss();
                     }
                 });
             }

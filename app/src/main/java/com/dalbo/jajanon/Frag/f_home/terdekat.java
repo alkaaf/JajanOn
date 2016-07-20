@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.dalbo.jajanon.Adapt.listview.Default;
-import com.dalbo.jajanon.Entity.DataLapak;
 import com.dalbo.jajanon.LapakActivity;
 import com.dalbo.jajanon.R;
 
@@ -31,7 +29,7 @@ public class terdekat extends Fragment implements ListView.OnItemClickListener{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.n_home_tab,container,false);
         lv = (ListView)v.findViewById(R.id.home_lv);
-        lv.setAdapter(new Default(getContext(), DataLapak.getDummy()));
+//        lv.setAdapter(new Default(getContext(), DataLapak.getDummy()));
         lv.setOnItemClickListener(this);
         return v;
     }

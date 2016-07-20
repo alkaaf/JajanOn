@@ -7,27 +7,36 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.dalbo.jajanon.Frag.f_lapak.lokasi;
 import com.dalbo.jajanon.Frag.f_lapak.overview;
 import com.dalbo.jajanon.Frag.f_lapak.ulasan;
+import com.dalbo.jajanon.Service.LapakData;
 
 /**
  * Created by alkaaf on 7/7/2016.
  */
-public class LapakPager extends FragmentPagerAdapter{
+public class LapakPager extends FragmentPagerAdapter {
+    LapakData data;
+
     // konstruktor untuk mengisi fragmentmanager pada parent
     public LapakPager(FragmentManager fm) {
         super(fm);
+    }
+
+    public LapakPager(FragmentManager fm, LapakData d) {
+        super(fm);
+        this.data = d;
     }
 
     // Pengembalian fragment sebagai view di viewpager
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new lokasi();
+            return new lokasi(data);
         } else if (position == 1) {
-            return new overview();
+            return new overview(data);
         } else if (position == 2) {
-            return new ulasan();
+            return new ulasan(data);
         } else return null;
     }
+
     // Mengembalikan jumlah tab dalam viewpager
     @Override
     public int getCount() {

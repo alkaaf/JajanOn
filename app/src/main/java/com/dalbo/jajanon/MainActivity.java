@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_profil) {
             i = new Intent(this, ProfileActivity.class);
+            i.putExtra("uid",Pref.getUid());
             i.putExtra("tab", 0);
             startActivity(i);
         } else if (id == R.id.nav_login) {
