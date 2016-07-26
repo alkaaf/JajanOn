@@ -91,7 +91,6 @@ public class LapakActivity extends AppCompatActivity implements View.OnClickList
 //                    });
                 }
             }).start();
-
         }
     }
 }

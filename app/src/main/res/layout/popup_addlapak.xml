@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:id="@+id/notif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        >
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:text="Sinyal GPS belum ditemukan" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/notif">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="Nama lapak"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/namaLapak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView2"
+                android:inputType="textCapSentences" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/namaLapak"
+                android:layout_marginTop="8dp"
+                android:text="Alamat (Klik icon untuk isi alamat otomatis)"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/alamat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView4"
+                android:layout_toStartOf="@+id/gpsStatus" />
+
+            <ImageView
+                android:id="@+id/gpsStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/alamat"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/textView4"
+                android:src="@mipmap/ic_gpslost" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/alamat"
+                android:layout_marginTop="8dp"
+                android:text="Waktu buka (Klik 2x untuk mengisi)"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/jamBuka"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView5"
+                android:inputType="none" />
+
+            <EditText
+                android:id="@+id/jamTutup"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/fotolLapak"
+                android:layout_toEndOf="@+id/textView6"
+                android:inputType="none" />
+
+            <TextView
+                android:id="@+id/fotolLapak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/jamBuka"
+                android:layout_marginTop="8dp"
+                android:text="Foto Lapak"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/cover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/fotolLapak"
+                android:layout_toStartOf="@+id/gpsStatus"
+                android:lines="1"
+                />
+
+            <Button
+                android:id="@+id/chooseFile"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/cover"
+                android:layout_alignTop="@+id/cover"
+                android:layout_toEndOf="@+id/cover"
+                android:text="..." />
+
+            <ImageView
+                android:id="@+id/preview"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@id/cover"
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+
+                android:maxHeight="150dp" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/preview"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp">
+
+                <Button
+                    android:id="@+id/batal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Batal" />
+
+                <Button
+                    android:id="@+id/simpan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/batal"
+                    android:text="Simpan" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/fotolLapak"
+                android:layout_toEndOf="@+id/jamBuka"
+                android:text="-"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

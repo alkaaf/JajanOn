@@ -26,7 +26,7 @@ public class overview extends Fragment implements View.OnClickListener{
     RatingBar ratingBar;
     TextView ratingVal, totalPelanggan, totalUlasan, penjual, alamat, jambuka;
     Button showProfile, addUlasan;
-
+    int mbuka, mtutup, hbuka, htutup;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,10 +48,28 @@ public class overview extends Fragment implements View.OnClickListener{
         penjual.setText(data.getDataLapak().getNama());
         alamat.setText(data.getDataLapak().getAlamat());
         ratingVal.setText(data.getDataLapak().getRating()+"/5");
-        jambuka.setText(data.getDataLapak().getBuka() + " - " + data.getDataLapak().getTutup());
+        hbuka = (int)(data.getDataLapak().getBuka()/60);
+        mbuka = data.getDataLapak().getBuka()%60;
+        htutup = (int)(data.getDataLapak().getTutup()/60);
+        mtutup = data.getDataLapak().getTutup()%60;
+        jambuka.setText(timeReformat(hbuka,mbuka)+" - "+timeReformat(htutup,mtutup));
         return v;
     }
+    private String timeReformat(int h, int m){
+        String fh, fm;
+        if(h < 10){
+            fh = String.format("0%d",h);
+        } else {
+            fh = String.format("%d",h);
+        }
 
+        if(m < 10){
+            fm = String.format("0%d",m);
+        } else {
+            fm = String.format("%d",m);
+        }
+        return fh+":"+fm;
+    }
     @Override
     public void onClick(View v) {
         if(v == showProfile){

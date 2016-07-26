@@ -84,14 +84,4 @@ public class DataLapak {
     public long getTimestamp() {
         return timestamp;
     }
-
-//    public static ArrayList<DataLapak> getDummy() {
-//        ArrayList<DataLapak> data = new ArrayList<>();
-//        data.add(new DataLapak(1, "Nasgor 123", "Pesawat Suhat", "gambar.png", 6, 20, 2.8f, new LatLng(90, 25), 123456789));
-//        data.add(new DataLapak(2, "Nasgor 345", "Pesawat Suhat", "gambar.png", 16, 20, 2.8f, new LatLng(90, 25), 123456789));
-//        data.add(new DataLapak(3, "Nasgor 765", "Pesawat Suhat", "gambar.png", 10, 20, 2.8f, new LatLng(90, 25), 123456789));
-//        data.add(new DataLapak(4, "Nasgor 987", "Pesawat Suhat", "gambar.png", 16, 20, 2.8f, new LatLng(90, 25), 123456789));
-//        data.add(new DataLapak(5, "Nasgor 412", "Pesawat Suhat", "gambar.png", 9, 20, 2.8f, new LatLng(90, 25), 123456789));
-//        return data;
-//    }
 }

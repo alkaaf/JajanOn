@@ -40,12 +40,11 @@ public class KelolaLapak extends ArrayAdapter<DataLapak> {
         ImageView bEdit;
         usaha = (TextView) v.findViewById(R.id.judul);
         alamat = (TextView) v.findViewById(R.id.alamat);
-        ratingVal = (TextView) v.findViewById(R.id.ratingVal);
+//        ratingVal = (TextView) v.findViewById(R.id.ratingVal);
         ratingBar = (RatingBar) v.findViewById(R.id.ratingBar);
-        bEdit = (ImageView) v.findViewById(R.id.edit);
         usaha.setText(data.get(position).getNama());
         alamat.setText(data.get(position).getAlamat());
-        ratingVal.setText(data.get(position).getRating() + "");
+//        ratingVal.setText(data.get(position).getRating() + "");
         ratingBar.setRating(data.get(position).getRating());
         cover.setImageBitmap(data.get(position).getBitmapSampul());
         return v;

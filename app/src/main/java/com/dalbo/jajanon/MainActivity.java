@@ -2,6 +2,7 @@ package com.dalbo.jajanon;
 
 
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,14 +15,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TimePicker;
 
 import com.dalbo.jajanon.Adapt.pager.HomePager;
 import com.dalbo.jajanon.Core.Pref;
 import com.dalbo.jajanon.Dialg.login;
 import com.dalbo.jajanon.Dialg.register;
+import com.dalbo.jajanon.Dialg.registerLapak;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener {
     ViewPager home_content;
     Menu mainMenu;
 
@@ -124,15 +127,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_login) {
             Dialog d = new login(this, this);
             d.setTitle("Login");
-            d.getWindow().setTitleColor(R.color.white);
-            d.getWindow().setBackgroundDrawableResource(R.color.colorPrimary);
             d.setCancelable(true);
             d.show();
         } else if (id == R.id.nav_register){
             Dialog d = new register(this,this);
             d.setTitle("Register");
-            d.getWindow().setTitleColor(R.color.white);
-            d.getWindow().setBackgroundDrawableResource(R.color.colorPrimary);
             d.setCancelable(true);
             d.show();
         } else if (id == R.id.nav_logout) {
@@ -142,12 +141,22 @@ public class MainActivity extends AppCompatActivity
             i.putExtra("tab", 1);
             startActivity(i);
         } else if (id == R.id.nav_tambahusaha) {
-            i = new Intent(this, ProfileActivity.class);
-            i.putExtra("tab", 2);
-            startActivity(i);
+            Dialog d = new registerLapak(this,this);
+            d.show();
+//            i = new Intent(this, ProfileActivity.class);
+//            i.putExtra("tab", 2);
+//            startActivity(i);
+        } else if (id == R.id.nav_pengaturan){
+            TimePickerDialog td = new TimePickerDialog(this,this,24,60,true);
+            td.show();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
     }
 }

@@ -19,15 +19,19 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/dummy_avatar"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/relativeLayout5"
+        android:paddingLeft="8dp"
+        android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/relativeLayout5"
-        android:padding="3dp">
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/relativeLayout5">
 
         <TextView
             android:id="@+id/judul"
@@ -35,15 +39,19 @@
             android:layout_height="wrap_content"
             android:text="Judul"
 
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/alamat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Alamat"
+            android:layout_alignStart="@+id/judul"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/ratingBar" />
+            android:layout_toStartOf="@+id/imageView4"
+            android:layout_below="@+id/ratingBar" />
 
         <RatingBar
             android:layout_width="wrap_content"
@@ -51,24 +59,32 @@
             android:id="@+id/ratingBar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_below="@+id/judul"
-            android:layout_alignStart="@+id/judul" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4.5"
-            android:id="@+id/ratingVal"
-            android:layout_alignTop="@+id/ratingBar"
-            android:layout_toEndOf="@+id/ratingBar"
-            android:layout_marginLeft="5dp" />
+            android:layout_alignParentStart="true" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/edit"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView"
+            android:src="@mipmap/ic_edit"
+            android:layout_alignTop="@+id/imageView4"
+            android:layout_toStartOf="@+id/imageView5" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView4"
+            android:src="@mipmap/ic_gps"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:src="@mipmap/ic_edit" />
+            android:layout_toStartOf="@+id/imageView" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView5"
+            android:src="@mipmap/ic_trash"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_alignParentEnd="true" />
+
     </RelativeLayout>
 
 </RelativeLayout>

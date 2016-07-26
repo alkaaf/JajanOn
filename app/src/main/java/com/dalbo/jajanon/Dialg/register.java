@@ -2,6 +2,7 @@ package com.dalbo.jajanon.Dialg;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
@@ -59,43 +60,39 @@ public class register extends Dialog implements View.OnClickListener, TextWatche
                     ) {
                 Toast.makeText(c, "Cek masukan yang belum diisi", Toast.LENGTH_SHORT).show();
             } else {
+                final ProgressDialog pd = new ProgressDialog(c);
                 if (repassword.getText().toString().equals(password.getText().toString())) {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            int res;
+                            act.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    pd.setMessage("Mendaftarkan...");
+                                    pd.show();
+                                }
+                            });
                             Register du = new Register(c.getString(R.string.svc));
-                            res = du.register(username.getText().toString(), email.getText().toString(), password.getText().toString(), telp.getText().toString());
-                            if (res == 0) {
-                                act.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
+                            final int res = du.register(username.getText().toString(), email.getText().toString(), password.getText().toString(), telp.getText().toString());
+                            act.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (res == 0) {
                                         Toast.makeText(c, "Registrasi gagal, ulangi lagi", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else if (res == -1) {
-                                act.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
+                                        pd.dismiss();
+                                    } else if (res == -1) {
                                         Toast.makeText(c, "Email telah dipakai, masukkan email lain atau coba login", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else if (res == -2) {
-                                act.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
+                                        pd.dismiss();
+                                    } else if (res == -2) {
                                         Toast.makeText(c, "Registrasi gagal, cek koneksi dan ulangi lagi", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else if (res == 1) {
-                                act.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
+                                        pd.dismiss();
+                                    } else if (res == 1) {
                                         Toast.makeText(c, "Registrasi sukses,silahkan login untuk melanjutkan", Toast.LENGTH_SHORT).show();
+                                        pd.dismiss();
                                         me.dismiss();
                                     }
-                                });
-                            }
+                                }
+                            });
                         }
                     }).start();
                 } else {

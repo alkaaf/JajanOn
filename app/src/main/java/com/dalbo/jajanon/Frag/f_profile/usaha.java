@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.dalbo.jajanon.Adapt.listview.KelolaLapak;
@@ -21,7 +22,7 @@ import com.dalbo.jajanon.Service.UserData;
 public class usaha extends Fragment implements ListView.OnItemClickListener{
     UserData data;
     ListView lv;
-
+Button addUsaha;
     public usaha() {
     }
 
