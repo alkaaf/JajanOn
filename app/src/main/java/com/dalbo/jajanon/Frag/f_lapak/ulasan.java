@@ -14,7 +14,7 @@ import com.dalbo.jajanon.Adapt.listview.Ulasan;
 import com.dalbo.jajanon.Core.Pref;
 import com.dalbo.jajanon.Dialg.addUlasan;
 import com.dalbo.jajanon.R;
-import com.dalbo.jajanon.Service.LapakData;
+import com.dalbo.jajanon.Service.SvcLapak;
 
 /**
  * Created by alkaaf on 7/7/2016.
@@ -22,8 +22,8 @@ import com.dalbo.jajanon.Service.LapakData;
 public class ulasan extends Fragment implements View.OnClickListener{
     ListView lv;
     Button tambah_ulasan;
-    LapakData data;
-    public ulasan(LapakData d) {
+    SvcLapak data;
+    public ulasan(SvcLapak d) {
         this.data = d;
     }
 
@@ -43,7 +43,7 @@ public class ulasan extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v == tambah_ulasan){
-            Dialog d = new addUlasan(Pref.getUid(),data.getDataLapak().getId(),getContext(),getActivity());
+            Dialog d = new addUlasan(data.getDataLapak().getId(),getContext(),getActivity());
             d.show();
         }
     }

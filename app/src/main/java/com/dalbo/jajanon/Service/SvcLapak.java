@@ -24,7 +24,7 @@ import java.util.ArrayList;
 /**
  * Created by alkaaf on 7/16/2016.
  */
-public class LapakData {
+public class SvcLapak {
     URL url;
     Context c;
     Activity act;
@@ -35,7 +35,7 @@ public class LapakData {
     Bitmap bmCover;
     DataLapak lapak;
 
-    public LapakData(int id, String mainUrl, Context c, Activity act) {
+    public SvcLapak(int id, String mainUrl, Context c, Activity act) {
         Pref.init(c);
         try {
             this.url = new URL(mainUrl + "getdetaillapak.php?id=" + id + "&uid=" + Pref.getUid());

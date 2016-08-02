@@ -26,7 +26,7 @@ import java.util.Date;
 /**
  * Created by alkaaf on 7/15/2016.
  */
-public class UserData {
+public class SvcUser {
     URL url;
     Context c;
     Activity act;
@@ -36,7 +36,7 @@ public class UserData {
     Bitmap bmAvatar;
     ArrayList<DataLapak> lapakLanggan, lapakKu;
 
-    public UserData(int id, String mainUrl, Context c, Activity a) {
+    public SvcUser(int id, String mainUrl, Context c, Activity a) {
         try {
             this.url = new URL(mainUrl + "getuserdata.php?uid=" + id);
         } catch (MalformedURLException e) {

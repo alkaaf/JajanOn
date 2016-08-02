@@ -14,19 +14,19 @@ import android.widget.ListView;
 import com.dalbo.jajanon.Adapt.listview.KelolaLapak;
 import com.dalbo.jajanon.LapakActivity;
 import com.dalbo.jajanon.R;
-import com.dalbo.jajanon.Service.UserData;
+import com.dalbo.jajanon.Service.SvcUser;
 
 /**
  * Created by alkaaf on 7/7/2016.
  */
 public class usaha extends Fragment implements ListView.OnItemClickListener{
-    UserData data;
+    SvcUser data;
     ListView lv;
 Button addUsaha;
     public usaha() {
     }
 
-    public usaha(UserData d) {
+    public usaha(SvcUser d) {
         this.data = d;
     }
 

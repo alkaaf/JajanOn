@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.dalbo.jajanon.Adapt.pager.ProfilePager;
 import com.dalbo.jajanon.Core.Pref;
 import com.dalbo.jajanon.CustomClass.Rounder;
-import com.dalbo.jajanon.Service.UserData;
+import com.dalbo.jajanon.Service.SvcUser;
 
 /**
  * Created by alkaaf on 7/7/2016.
@@ -22,7 +22,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView avatar;
     TextView nama, email;
     ViewPager vp;
-    UserData d;
+    SvcUser d;
     int uid;
     Context c;
     Activity act;
@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
         nama = (TextView)findViewById(R.id.nama);
         email = (TextView)findViewById(R.id.email);
         vp = (ViewPager)findViewById(R.id.profile_content);
-        d = new UserData(uid,getString(R.string.svc),c,act);
+        d = new SvcUser(uid,getString(R.string.svc),c,act);
         // setting avatar image, name, email
         new Thread(new Runnable() {
             @Override

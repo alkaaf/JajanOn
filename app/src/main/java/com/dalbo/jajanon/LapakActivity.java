@@ -10,30 +10,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dalbo.jajanon.Adapt.pager.LapakPager;
-import com.dalbo.jajanon.Service.LapakData;
+import com.dalbo.jajanon.Service.SvcLapak;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by alkaaf on 7/7/2016.
  */
-public class LapakActivity extends AppCompatActivity implements View.OnClickListener{
+public class LapakActivity extends AppCompatActivity implements View.OnClickListener {
     ProgressDialog loading;
     ViewPager vp;
-    LapakData data;
+    SvcLapak data;
     ImageView cover;
+    TextView status;
     Context c;
     Activity act;
     Button langganan;
+
     //tampilkan layout lapak dan memasang adapter pada view pager
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.n_lapak);
-        data = new LapakData(getIntent().getExtras().getInt("lid",-1),getString(R.string.svc),this,this);
-        vp =(ViewPager)findViewById(R.id.lapak_content);
-        cover = (ImageView)findViewById(R.id.cover);
-        langganan = (Button)findViewById(R.id.langganan);
+        data = new SvcLapak(getIntent().getExtras().getInt("lid", -1), getString(R.string.svc), this, this);
+        vp = (ViewPager) findViewById(R.id.lapak_content);
+        cover = (ImageView) findViewById(R.id.cover);
+        langganan = (Button) findViewById(R.id.langganan);
+        status = (TextView) findViewById(R.id.status);
         langganan.setOnClickListener(this);
         c = this;
         act = this;
@@ -52,7 +59,7 @@ public class LapakActivity extends AppCompatActivity implements View.OnClickList
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(data.isLanggan()){
+                        if (data.isLanggan()) {
                             langganan.setBackgroundResource(R.drawable.bunder_green);
                             langganan.setText("Langganan");
                         } else {
@@ -61,6 +68,20 @@ public class LapakActivity extends AppCompatActivity implements View.OnClickList
                         }
                         vp.setAdapter(new LapakPager(getSupportFragmentManager(), data));
                         cover.setImageBitmap(data.getDataLapak().getBitmapSampul());
+                        // ngolah status
+                        int minbuka, mintutup, now;
+                        minbuka = data.getDataLapak().getBuka();
+                        mintutup = data.getDataLapak().getTutup();
+                        now = Integer.parseInt(new SimpleDateFormat("HH").format(new Date())) * 60 + Integer.parseInt(new SimpleDateFormat("mm").format(new Date()));
+                        if (minbuka > mintutup) {
+                            mintutup = mintutup + 60 * 24;
+                            now = now + 60 * 24;
+                        }
+                        if (now > minbuka && now < mintutup) {
+                            // nek buka lapo
+                        } else {
+                            //nek tutup lapo
+                        }
                         loading.dismiss();
                     }
                 });
@@ -70,25 +91,11 @@ public class LapakActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if(v == langganan){
+        if (v == langganan) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     final int res = data.setLanggan();
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            if(res > 0){
-//                                Toast.makeText(c,"Berlangganan sukses",Toast.LENGTH_SHORT).show();
-//                                langganan.setBackgroundResource(R.drawable.bunder_green);
-//                                langganan.setText("Langganan");
-//                            } else {
-//                                Toast.makeText(c,"Berlangganan gagal. Coba lagi!",Toast.LENGTH_SHORT).show();
-//                                langganan.setBackgroundResource(R.drawable.bunder_red);
-//                                langganan.setText("Tidak berlangganan");
-//                            }
-//                        }
-//                    });
                 }
             }).start();
         }

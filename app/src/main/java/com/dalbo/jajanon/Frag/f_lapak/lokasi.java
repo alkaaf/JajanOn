@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dalbo.jajanon.R;
-import com.dalbo.jajanon.Service.LapakData;
+import com.dalbo.jajanon.Service.SvcLapak;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -23,8 +23,8 @@ public class lokasi extends Fragment implements OnMapReadyCallback {
     MapView mapv;
     GoogleMap gmap;
     LatLng ll;
-    LapakData data;
-    public lokasi(LapakData d) {
+    SvcLapak data;
+    public lokasi(SvcLapak d) {
         this.data = d;
     }
 

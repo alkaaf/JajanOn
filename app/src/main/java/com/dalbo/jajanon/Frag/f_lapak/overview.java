@@ -13,14 +13,14 @@ import android.widget.TextView;
 
 import com.dalbo.jajanon.ProfileActivity;
 import com.dalbo.jajanon.R;
-import com.dalbo.jajanon.Service.LapakData;
+import com.dalbo.jajanon.Service.SvcLapak;
 
 /**
  * Created by alkaaf on 7/7/2016.
  */
 public class overview extends Fragment implements View.OnClickListener{
-    LapakData data;
-    public overview(LapakData d) {
+    SvcLapak data;
+    public overview(SvcLapak d) {
         this.data = d;
     }
     RatingBar ratingBar;

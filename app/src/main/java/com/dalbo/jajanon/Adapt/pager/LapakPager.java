@@ -7,20 +7,20 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.dalbo.jajanon.Frag.f_lapak.lokasi;
 import com.dalbo.jajanon.Frag.f_lapak.overview;
 import com.dalbo.jajanon.Frag.f_lapak.ulasan;
-import com.dalbo.jajanon.Service.LapakData;
+import com.dalbo.jajanon.Service.SvcLapak;
 
 /**
  * Created by alkaaf on 7/7/2016.
  */
 public class LapakPager extends FragmentPagerAdapter {
-    LapakData data;
+    SvcLapak data;
 
     // konstruktor untuk mengisi fragmentmanager pada parent
     public LapakPager(FragmentManager fm) {
         super(fm);
     }
 
-    public LapakPager(FragmentManager fm, LapakData d) {
+    public LapakPager(FragmentManager fm, SvcLapak d) {
         super(fm);
         this.data = d;
     }

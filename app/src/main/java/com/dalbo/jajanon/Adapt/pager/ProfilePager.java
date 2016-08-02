@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import com.dalbo.jajanon.Frag.f_profile.langganan;
 import com.dalbo.jajanon.Frag.f_profile.overview;
 import com.dalbo.jajanon.Frag.f_profile.usaha;
-import com.dalbo.jajanon.Service.UserData;
+import com.dalbo.jajanon.Service.SvcUser;
 
 /**
  * Created by alkaaf on 7/7/2016.
@@ -17,13 +17,13 @@ import com.dalbo.jajanon.Service.UserData;
 
 public class ProfilePager extends FragmentPagerAdapter {
     ViewPager vp;
-    UserData data;
-    public ProfilePager(FragmentManager fm, UserData d) {
+    SvcUser data;
+    public ProfilePager(FragmentManager fm, SvcUser d) {
         super(fm);
         this.data = d;
     }
 
-    public ProfilePager(FragmentManager fm, UserData d, ViewPager vp) {
+    public ProfilePager(FragmentManager fm, SvcUser d, ViewPager vp) {
         super(fm);
         this.vp = vp;
         this.data = d;

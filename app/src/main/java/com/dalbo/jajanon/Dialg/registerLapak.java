@@ -85,7 +85,7 @@ public class registerLapak extends Dialog implements LocationListener, View.OnCl
         simpan = (Button) findViewById(R.id.simpan);
         gpsStatus = (ImageView) findViewById(R.id.gpsStatus);
         preview = (ImageView) findViewById(R.id.preview);
-        cover = (EditText)findViewById(R.id.cover);
+        cover = (EditText) findViewById(R.id.cover);
         fc.setFileListener(this);
         jamBuka.setOnClickListener(this);
         jamTutup.setOnClickListener(this);

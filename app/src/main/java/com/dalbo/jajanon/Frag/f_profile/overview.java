@@ -9,20 +9,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dalbo.jajanon.R;
-import com.dalbo.jajanon.Service.UserData;
+import com.dalbo.jajanon.Service.SvcUser;
 
 /**
  * Created by alkaaf on 7/7/2016.
  */
 public class overview extends Fragment{
 
-    UserData data;
+    SvcUser data;
 
     public overview() {
     }
 
     // set viewpager untuk tombol
-    public overview(UserData d) {
+    public overview(SvcUser d) {
         this.data = d;
     }
 
