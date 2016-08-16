@@ -41,8 +41,13 @@ public class RegisterLapak {
         JSONObject maindata = new JSONObject();
         try {
             Bitmap bm = BitmapFactory.decodeStream(new FileInputStream(cover));
+            double ratio = (double)bm.getWidth()/(double)bm.getHeight();
+            int newWidth, newHeight;
+            newHeight = 600;
+            newWidth = (int) Math.ceil(newHeight*ratio);
+            Bitmap newbm = Bitmap.createScaledBitmap(bm,newWidth, newHeight, true);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.PNG,90,baos);
+            newbm.compress(Bitmap.CompressFormat.PNG,90,baos);
             byte[] imgbyte = baos.toByteArray();
             String imgStr = Base64.encodeToString(imgbyte, Base64.DEFAULT);
             maindata.put("uid", uid);
@@ -61,7 +66,17 @@ public class RegisterLapak {
             conn.connect();
             // send data
             dos = new DataOutputStream(conn.getOutputStream());
-            dos.writeBytes("data="+maindata.toString());
+//            dos.writeBytes("data="+maindata.toString());
+            dos.writeBytes("data=");
+            String raw = maindata.toString();
+            int size;
+            int len = 2048;
+            int start = 0;
+            while(start < raw.length()){
+                size = Math.min(len,raw.length()-start);
+                dos.writeBytes(raw.substring(start,start+size));
+                start += len;
+            }
             // result
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder buff = new StringBuilder();

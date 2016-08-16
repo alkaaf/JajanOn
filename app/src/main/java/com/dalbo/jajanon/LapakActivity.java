@@ -79,8 +79,12 @@ public class LapakActivity extends AppCompatActivity implements View.OnClickList
                         }
                         if (now > minbuka && now < mintutup) {
                             // nek buka lapo
+                            status.setText("BUKA");
+                            status.setBackgroundResource(R.drawable.bunder_green);
                         } else {
                             //nek tutup lapo
+                            status.setText("TUTUP");
+                            status.setBackgroundResource(R.drawable.bunder_red);
                         }
                         loading.dismiss();
                     }
@@ -91,8 +95,7 @@ public class LapakActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if (v == langganan) {
-            new Thread(new Runnable() {
+        if (v == langganan) {            new Thread(new Runnable() {
                 @Override
                 public void run() {
                     final int res = data.setLanggan();
