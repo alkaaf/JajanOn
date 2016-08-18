@@ -30,4 +30,6 @@ public class Pref {
         edit.putString("auth",val);
         edit.commit();
     }
+    public static double latNow = 0;
+    public static double lngNow = 0;
 }

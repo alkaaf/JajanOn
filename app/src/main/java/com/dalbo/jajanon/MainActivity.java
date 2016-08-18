@@ -1,9 +1,14 @@
 package com.dalbo.jajanon;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,16 +27,24 @@ import com.dalbo.jajanon.Core.Pref;
 import com.dalbo.jajanon.Dialg.login;
 import com.dalbo.jajanon.Dialg.register;
 import com.dalbo.jajanon.Dialg.registerLapak;
+import com.dalbo.jajanon.Service.SvcAllLapak;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener {
+        implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener, LocationListener {
     ViewPager home_content;
     Menu mainMenu;
-
+    Activity act;
+    Context c;
+    SvcAllLapak data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        act = this;
+        c = this;
+        // setting gps
+        LocationManager lm = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
         // deklarasi navigation menu
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -45,7 +58,20 @@ public class MainActivity extends AppCompatActivity
         home_content = (ViewPager) findViewById(R.id.home_content);
 
         // masukkan adapter kedalam viewpager
-        home_content.setAdapter(new HomePager(getSupportFragmentManager(), this, this));
+        data = new SvcAllLapak(getString(R.string.svc),act,c);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                data.connect();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        home_content.setAdapter(new HomePager(getSupportFragmentManager(), data));
+                    }
+                });
+            }
+        }).start();
+
 
         toolbar.setTitle("JajanOn");
         setSupportActionBar(toolbar);
@@ -153,6 +179,27 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Pref.latNow = location.getLatitude();
+        Pref.lngNow = location.getLongitude();
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 
     @Override

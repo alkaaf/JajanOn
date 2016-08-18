@@ -2,6 +2,8 @@ package com.dalbo.jajanon.Entity;
 
 import android.graphics.Bitmap;
 
+import com.dalbo.jajanon.Core.Distance;
+import com.dalbo.jajanon.Core.Pref;
 import com.dalbo.jajanon.CustomClass.ImageDL;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -19,7 +21,6 @@ public class DataLapak {
     LatLng ll;
     long timestamp;
     Bitmap cover;
-
     public DataLapak(int id, int id_user, String nama, String alamat, String sampul, int buka, int tutup, float rating, LatLng ll, long timestamp) {
         this.id = id;
         this.id_user = id_user;
@@ -83,5 +84,9 @@ public class DataLapak {
 
     public long getTimestamp() {
         return timestamp;
+    }
+
+    public double getJarak(){
+        return Distance.getDistance(Pref.latNow,Pref.lngNow,getLl().latitude,getLl().longitude);
     }
 }

@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.dalbo.jajanon.Adapt.listview.Default;
 import com.dalbo.jajanon.LapakActivity;
 import com.dalbo.jajanon.R;
+import com.dalbo.jajanon.Service.SvcAllLapak;
 
 /**
  * Created by alkaaf on 7/7/2016.
@@ -20,7 +22,9 @@ import com.dalbo.jajanon.R;
 public class top extends Fragment implements ListView.OnItemClickListener{
     Context c;
     ListView lv;
-    public top() {
+    SvcAllLapak data;
+    public top(SvcAllLapak data) {
+        this.data = data;
     }
     // pembuatan view untuk fragment berisi setAdapter terhadap listview
     @Nullable
@@ -28,7 +32,7 @@ public class top extends Fragment implements ListView.OnItemClickListener{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.n_home_tab,container,false);
         lv = (ListView)v.findViewById(R.id.home_lv);
-//        lv.setAdapter(new Default(getContext(), DataLapak.getDummy()));
+        lv.setAdapter(new Default(getContext(), data.getListLapak()));
         lv.setOnItemClickListener(this);
         return v;
     }
@@ -36,6 +40,7 @@ public class top extends Fragment implements ListView.OnItemClickListener{
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getContext(), LapakActivity.class);
+        intent.putExtra("lid",data.getListLapak().get(position).getId());
         startActivity(intent);
     }
 }
