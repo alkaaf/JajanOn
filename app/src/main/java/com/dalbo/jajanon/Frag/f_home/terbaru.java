@@ -39,7 +39,7 @@ public class terbaru extends Fragment implements ListView.OnItemClickListener{
         c = getContext();
         lv = (ListView)v.findViewById(R.id.home_lv);
         lv.setOnItemClickListener(this);
-        lv.setAdapter(new Default(c,data.getListLapak()));
+        lv.setAdapter(new Default(c,act,data.getListLapak()));
         return v;
     }
 

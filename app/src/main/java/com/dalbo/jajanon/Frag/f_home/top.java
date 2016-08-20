@@ -32,7 +32,7 @@ public class top extends Fragment implements ListView.OnItemClickListener{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.n_home_tab,container,false);
         lv = (ListView)v.findViewById(R.id.home_lv);
-        lv.setAdapter(new Default(getContext(), data.getListLapak()));
+        lv.setAdapter(new Default(getContext(),getActivity(), data.getListLapak()));
         lv.setOnItemClickListener(this);
         return v;
     }

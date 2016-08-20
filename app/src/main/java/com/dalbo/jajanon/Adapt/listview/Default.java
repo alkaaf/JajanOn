@@ -1,5 +1,6 @@
 package com.dalbo.jajanon.Adapt.listview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,13 +24,18 @@ public class Default extends ArrayAdapter<DataLapak> {
     // Deklarasi variabel untuk penyimpanan data
     ArrayList<DataLapak> data;
     Context c;
+    Activity act;
     LayoutInflater li;
-
+    // Deklarasi elemen custom listview
+    TextView usaha, alamat, status, ratingVal, jarak; //jarak
+    ImageView cover;
+    RatingBar ratingBar;
     // Deklarasi konstruktor
-    public Default(Context context, ArrayList<DataLapak> objects) {
+    public Default(Context context, Activity act, ArrayList<DataLapak> objects) {
         super(context, R.layout.n_home_listrowview, objects);
         this.data = objects;
         this.c = context;
+        this.act = act;
         // Deklarasi layout inflater untuk menampilkan XML
         this.li = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -38,10 +44,7 @@ public class Default extends ArrayAdapter<DataLapak> {
     public View getView(int position, View convertView, ViewGroup parent) {
         // Inflate layout n_home_listrowview untuk digunakan sebagai tampilan custom listview
         View v = li.inflate(R.layout.n_home_listrowview,parent,false);
-        // Deklarasi elemen custom listview
-        TextView usaha, alamat, status, ratingVal, jarak; //jarak
-        ImageView cover;
-        RatingBar ratingBar;
+
         ratingBar = (RatingBar)v.findViewById(R.id.ratingBar);
         ratingVal  = (TextView)v.findViewById(R.id.ratingVal);
         cover = (ImageView)v.findViewById(R.id.img_cover);
@@ -55,21 +58,38 @@ public class Default extends ArrayAdapter<DataLapak> {
         ratingBar.setRating(data.get(position).getRating());
         usaha.setText(data.get(position).getNama());
         alamat.setText(data.get(position).getAlamat());
-        cover.setImageBitmap(data.get(position).getBitmapSampul());
+        jarak.setText(String.format("%.2f KM",data.get(position).getJarak()));
         int buka = data.get(position).getBuka();
         int tutup = data.get(position).getTutup();
-        int now = Integer.parseInt(new SimpleDateFormat("HH").format(new Date()));
-        if(buka > tutup){
-            buka += 12*60*60;
+        int now = Integer.parseInt(new SimpleDateFormat("HH").format(new Date())) * 60 + Integer.parseInt(new SimpleDateFormat("mm").format(new Date()));
+        if (buka > tutup) {
+            tutup = tutup + 60 * 24;
+            now = now + 60 * 24;
         }
         if(now > buka && now < tutup){
-            status.setTextColor(c.getResources().getColor(R.color.buka));
             status.setText("BUKA");
+            status.setBackgroundResource(R.drawable.bunder_green);
         } else {
-            status.setTextColor(c.getResources().getColor(R.color.tutup));
             status.setText("TUTUP");
+            status.setBackgroundResource(R.drawable.bunder_red);
         }
-
+        if(data.get(position).getBitmapSampul() == null) {
+            final int pos = position;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    data.get(pos).downloadSampul(getContext().getString(R.string.svc) + "img/cover/");
+                    act.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            cover.setImageBitmap(data.get(pos).getBitmapSampul());
+                        }
+                    });
+                }
+            }).start();
+        } else {
+            cover.setImageBitmap(data.get(position).getBitmapSampul());
+        }
         return v;
     }
 }

@@ -43,7 +43,7 @@ public class RegisterLapak {
             Bitmap bm = BitmapFactory.decodeStream(new FileInputStream(cover));
             double ratio = (double)bm.getWidth()/(double)bm.getHeight();
             int newWidth, newHeight;
-            newHeight = 600;
+            newHeight = 400;
             newWidth = (int) Math.ceil(newHeight*ratio);
             Bitmap newbm = Bitmap.createScaledBitmap(bm,newWidth, newHeight, true);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
