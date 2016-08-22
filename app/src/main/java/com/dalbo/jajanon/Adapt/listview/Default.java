@@ -78,7 +78,7 @@ public class Default extends ArrayAdapter<DataLapak> {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    data.get(pos).downloadSampul(getContext().getString(R.string.svc) + "img/cover/");
+                    data.get(pos).downloadSampul(getContext().getString(R.string.svc) + "img/cover/",100,100);
                     act.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

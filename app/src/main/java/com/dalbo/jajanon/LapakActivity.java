@@ -95,12 +95,18 @@ public class LapakActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if (v == langganan) {            new Thread(new Runnable() {
+        if (v == langganan) {new Thread(new Runnable() {
                 @Override
                 public void run() {
                     final int res = data.setLanggan();
                 }
             }).start();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        data.getDataLapak().flushCover();
     }
 }

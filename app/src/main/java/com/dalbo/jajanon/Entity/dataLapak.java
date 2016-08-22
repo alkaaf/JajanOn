@@ -66,6 +66,13 @@ public class DataLapak {
             e.printStackTrace();
         }
     }
+    public void downloadSampul(String url, int w, int h){
+        try {
+            cover = ImageDL.download(url + getSampul(),w,h);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public int getBuka() {
         return buka;
     }
@@ -88,5 +95,8 @@ public class DataLapak {
 
     public double getJarak(){
         return Distance.getDistance(Pref.latNow,Pref.lngNow,getLl().latitude,getLl().longitude);
+    }
+    public void flushCover(){
+        cover = null;
     }
 }
