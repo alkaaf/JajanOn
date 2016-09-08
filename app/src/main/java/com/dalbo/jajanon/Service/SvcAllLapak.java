@@ -65,7 +65,6 @@ public class SvcAllLapak {
                         new LatLng(data.getDouble("lat"), data.getDouble("lng")),
                         data.getLong("tstamp")
                 );
-//                lapak.downloadSampul(mainUrl + "img/cover/");
                 listlapak.add(lapak);
 
             }
