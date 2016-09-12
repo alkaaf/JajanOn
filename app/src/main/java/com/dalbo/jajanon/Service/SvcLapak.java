@@ -120,8 +120,9 @@ public class SvcLapak {
 
     public int setLanggan() {
         try {
-            new URL(c.getString(R.string.svc) + "setlanggan.php?id=" + id + "&uid=" + uid).openStream();
-            return 1;
+            BufferedReader br = new BufferedReader(new InputStreamReader(new URL(c.getString(R.string.svc) + "setlanggan.php?id=" + id + "&uid=" + uid).openStream()));
+            int res = Integer.parseInt(br.readLine());
+            return res;
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return 0;

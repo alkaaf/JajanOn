@@ -37,6 +37,9 @@ public class ulasan extends Fragment implements View.OnClickListener{
         tambah_ulasan.setOnClickListener(this);
 //        lv.setAdapter(new Ulasan(getContext(), DataUlasan.getDummy()));
         Pref.init(getContext());
+        if(Pref.getUid() == 0){
+            tambah_ulasan.setVisibility(View.GONE);
+        }
         return v;
     }
 

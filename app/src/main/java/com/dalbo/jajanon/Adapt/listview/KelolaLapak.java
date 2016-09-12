@@ -40,13 +40,27 @@ public class KelolaLapak extends ArrayAdapter<DataLapak> {
         ImageView bEdit;
         usaha = (TextView) v.findViewById(R.id.judul);
         alamat = (TextView) v.findViewById(R.id.alamat);
-//        ratingVal = (TextView) v.findViewById(R.id.ratingVal);
         ratingBar = (RatingBar) v.findViewById(R.id.ratingBar);
         usaha.setText(data.get(position).getNama());
         alamat.setText(data.get(position).getAlamat());
-//        ratingVal.setText(data.get(position).getRating() + "");
         ratingBar.setRating(data.get(position).getRating());
-        cover.setImageBitmap(data.get(position).getBitmapSampul());
+        if (data.get(position).getBitmapSampul() == null) {
+            final int pos = position;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    data.get(pos).downloadSampul(getContext().getString(R.string.svc) + "img/cover/", 100, 100);
+                    act.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            cover.setImageBitmap(data.get(pos).getBitmapSampul());
+                        }
+                    });
+                }
+            }).start();
+        } else {
+            cover.setImageBitmap(data.get(position).getBitmapSampul());
+        }
         return v;
     }
 }

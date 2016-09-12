@@ -69,7 +69,6 @@ public class SvcUser {
                 bmAvatar = ImageDL.download(mainUrl + "img/avatar/" + getAvatar());
             }
             // dapatkan daftar lapak langganan user
-
             ja = new JSONArray(readService(mainUrl + "getlapaklanggan.php?uid=" + uid));
             for (int i = 0; i < ja.length(); i++) {
                 JSONObject lapak = ja.getJSONObject(i);
@@ -84,10 +83,9 @@ public class SvcUser {
                         (float) lapak.getDouble("rating"),
                         new LatLng(lapak.getDouble("lat"), lapak.getDouble("lng")),
                         lapak.getLong("tstamp")));
-                lapakLanggan.get(i).downloadSampul(mainUrl + "img/cover/");
+                lapakLanggan.get(i).downloadSampul(mainUrl + "img/cover/", 640, 480);
             }
             // dapatkan daftar lapak user
-
             ja = new JSONArray(readService(mainUrl + "getlapakku.php?uid=" + uid));
             for (int i = 0; i < ja.length(); i++) {
                 JSONObject lapak = ja.getJSONObject(i);
@@ -102,16 +100,66 @@ public class SvcUser {
                         (float) lapak.getDouble("rating"),
                         new LatLng(lapak.getDouble("lat"), lapak.getDouble("lng")),
                         lapak.getLong("tstamp")));
-                lapakKu.get(i).downloadSampul(mainUrl + "img/cover/");
+//                lapakKu.get(i).downloadSampul(mainUrl + "img/cover/");
             }
-            int p = 0;
-            p = p + 1;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public void connectLapakLanggan() {
+        // dapatkan daftar lapak langganan user
+        try {
+            JSONArray ja = new JSONArray(readService(mainUrl + "getlapaklanggan.php?uid=" + uid));
+            for (int i = 0; i < ja.length(); i++) {
+                JSONObject lapak = ja.getJSONObject(i);
+                lapakLanggan.add(new DataLapak(
+                        lapak.getInt("id"),
+                        lapak.getInt("id_user"),
+                        lapak.getString("nama"),
+                        lapak.getString("alamat"),
+                        lapak.getString("sampul"),
+                        lapak.getInt("buka"),
+                        lapak.getInt("tutup"),
+                        (float) lapak.getDouble("rating"),
+                        new LatLng(lapak.getDouble("lat"), lapak.getDouble("lng")),
+                        lapak.getLong("tstamp")));
+                lapakLanggan.get(i).downloadSampul(mainUrl + "img/cover/", 640, 480);
+            }
+        } catch (JSONException e){
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void connectLapakKu() {
+        // dapatkan daftar lapak user
+        JSONArray ja;
+        try {
+            ja = new JSONArray(readService(mainUrl + "getlapakku.php?uid=" + uid));
+            for (int i = 0; i < ja.length(); i++) {
+                JSONObject lapak = ja.getJSONObject(i);
+                lapakKu.add(new DataLapak(
+                        lapak.getInt("id"),
+                        lapak.getInt("id_user"),
+                        lapak.getString("nama"),
+                        lapak.getString("alamat"),
+                        lapak.getString("sampul"),
+                        lapak.getInt("buka"),
+                        lapak.getInt("tutup"),
+                        (float) lapak.getDouble("rating"),
+                        new LatLng(lapak.getDouble("lat"), lapak.getDouble("lng")),
+                        lapak.getLong("tstamp")));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private String readService(String url) throws IOException {

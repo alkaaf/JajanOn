@@ -3,7 +3,6 @@ package com.dalbo.jajanon;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -17,12 +16,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TimePicker;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ListView;
 
-import com.dalbo.jajanon.Adapt.pager.HomePager;
+import com.dalbo.jajanon.Adapt.listview.Default;
 import com.dalbo.jajanon.Core.Pref;
 import com.dalbo.jajanon.Dialg.login;
 import com.dalbo.jajanon.Dialg.register;
@@ -30,12 +32,14 @@ import com.dalbo.jajanon.Dialg.registerLapak;
 import com.dalbo.jajanon.Service.SvcAllLapak;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, TimePickerDialog.OnTimeSetListener, LocationListener {
+        implements NavigationView.OnNavigationItemSelectedListener, LocationListener, View.OnKeyListener, ListView.OnItemClickListener {
     ViewPager home_content;
     Menu mainMenu;
     Activity act;
     Context c;
     SvcAllLapak data;
+    ListView mainlist;
+    EditText cari;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,23 +54,21 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         mainMenu = navigationView.getMenu();
         Pref.init(this);
-
+        mainlist = (ListView)findViewById(R.id.mainlist);
+        cari = (EditText)findViewById(R.id.cari);
+        cari.setOnKeyListener(this);
+        mainlist.setOnItemClickListener(this);
         // deklarasi variabel untuk toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        // deklarasi viewpager kedalam variabel
-        home_content = (ViewPager) findViewById(R.id.home_content);
-
-        // masukkan adapter kedalam viewpager
         data = new SvcAllLapak(getString(R.string.svc),act,c);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 data.connect();
-                runOnUiThread(new Runnable() {
+                act.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        home_content.setAdapter(new HomePager(getSupportFragmentManager(), data));
+                        mainlist.setAdapter(new Default(c,act,data.getListLapak()));
                     }
                 });
             }
@@ -172,9 +174,6 @@ public class MainActivity extends AppCompatActivity
 //            i = new Intent(this, ProfileActivity.class);
 //            i.putExtra("tab", 2);
 //            startActivity(i);
-        } else if (id == R.id.nav_pengaturan){
-            TimePickerDialog td = new TimePickerDialog(this,this,24,60,true);
-            td.show();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -203,7 +202,31 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(c, LapakActivity.class);
+        intent.putExtra("lid",data.getListLapak().get(position).getId());
+        startActivity(intent);
+    }
 
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        EditText cr = (EditText)v;
+
+        if(keyCode == KeyEvent.KEYCODE_ENTER ){
+            final SvcAllLapak cariData = new SvcAllLapak(getString(R.string.svc),cr.getText().toString(),act,c);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    cariData.connect();
+                    act.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mainlist.setAdapter(new Default(c,act,cariData.getListLapak()));
+                        }
+                    });
+                }
+            }).start();
+        }
+        return false;
     }
 }

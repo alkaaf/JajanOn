@@ -40,6 +40,17 @@ public class SvcAllLapak {
         this.c = c;
         listlapak = new ArrayList<>();
     }
+    public SvcAllLapak(String mainUrl,String s, Activity act, Context c) {
+        this.mainUrl = mainUrl;
+        try {
+            url = new URL(mainUrl+"bynew.php?lat="+lat+"&lng="+lng+"&s="+s);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        this.act = act;
+        this.c = c;
+        listlapak = new ArrayList<>();
+    }
     public void connect(){
         BufferedReader br = null;
         StringBuilder sb = new StringBuilder();
