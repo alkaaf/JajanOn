@@ -100,7 +100,7 @@ public class SvcUser {
                         (float) lapak.getDouble("rating"),
                         new LatLng(lapak.getDouble("lat"), lapak.getDouble("lng")),
                         lapak.getLong("tstamp")));
-//                lapakKu.get(i).downloadSampul(mainUrl + "img/cover/");
+                lapakKu.get(i).downloadSampul(mainUrl + "img/cover/");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -111,6 +111,8 @@ public class SvcUser {
     }
 
     public void connectLapakLanggan() {
+        lapakLanggan.clear();
+
         // dapatkan daftar lapak langganan user
         try {
             JSONArray ja = new JSONArray(readService(mainUrl + "getlapaklanggan.php?uid=" + uid));
@@ -137,6 +139,7 @@ public class SvcUser {
     }
 
     public void connectLapakKu() {
+        lapakKu.clear();
         // dapatkan daftar lapak user
         JSONArray ja;
         try {

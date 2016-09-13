@@ -44,18 +44,18 @@ public class usaha extends Fragment implements ListView.OnItemClickListener {
         c = getContext();
         act = getActivity();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                data.connectLapakKu();
-                act.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        lv.setAdapter(new KelolaLapak(c, act, data.getLapakKu()));
-                    }
-                });
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                data.connectLapakKu();
+//                act.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        lv.setAdapter(new KelolaLapak(c, act, data.getLapakKu()));
+//                    }
+//                });
+//            }
+//        }).start();
         lv.setAdapter(new KelolaLapak(getContext(), getActivity(), data.getLapakKu()));
         lv.setOnItemClickListener(this);
         return v;

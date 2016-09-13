@@ -87,9 +87,10 @@ public class Default extends ArrayAdapter<DataLapak> {
                     });
                 }
             }).start();
-        } else {
-            cover.setImageBitmap(data.get(position).getBitmapSampul());
         }
+//        else {
+//            cover.setImageBitmap(data.get(position).getBitmapSampul());
+//        }
         return v;
     }
 }

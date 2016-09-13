@@ -41,18 +41,18 @@ public class langganan extends Fragment implements ListView.OnItemClickListener{
         c = getContext();
         act = getActivity();
         // fetch langgan data
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                data.connectLapakLanggan();
-                act.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        lv.setAdapter(new Default(c,act,data.getLapakLanggan()));
-                    }
-                });
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                data.connectLapakLanggan();
+//                act.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        lv.setAdapter(new Default(c,act,data.getLapakLanggan()));
+//                    }
+//                });
+//            }
+//        }).start();
         lv.setAdapter(new Default(getContext(),getActivity(), data.getLapakLanggan()));
         lv.setOnItemClickListener(this);
         return v;
